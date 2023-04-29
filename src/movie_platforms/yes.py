@@ -10,8 +10,10 @@ class YesMoviePlatform(MoviePlatform):
         request_url = f"https://www.yes.co.il/result?q={movie.name}"
         response = requests.get(request_url).text
 
-        if not "/content/movies" in response:
+        if response.count("/content/movies") != 1:
             return None
+
+        # TODO: add title validation
 
         start = response.index("/content/movies")
         end = response.index('"', start)
