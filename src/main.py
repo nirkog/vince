@@ -13,6 +13,7 @@ def parse_arguments():
 
     parser.add_argument("-w", "--watchlist-type", type=str, required=True, dest="watchlist_type", help="Watchlist type")
     parser.add_argument("-lc", "--letterboxd-csv", type=str, required=False, dest="letterboxd_csv_filename", help="Letterboxd generated watchlist csv file, required if the letterboxd watchlist is chosen")
+    parser.add_argument("-lu", "--letterboxd-username", type=str, required=False, dest="letterboxd_username", help="Letterboxd username to retrieve the watchlist")
     parser.add_argument("-o", "--output-file", type=str, required=False, dest="output_filename", help="If specified, the search results will be saved to this path")
     parser.add_argument("-p", "--platforms", type=str, required=False, dest="platforms", help="A comma separated list of streaming platforms to search")
 
@@ -26,6 +27,7 @@ def main():
     if not args.watchlist_type in WATCHLISTS:
         print("BAD WATCHLIST TYPE")
 
+    print("Loading watchlist...")
     watchlist = WATCHLISTS[args.watchlist_type](args)
     watchlist.load()
 
