@@ -76,20 +76,11 @@ def main():
                 SearchThread(platforms[platform], movie)))
             threads[-1][-1].start()
 
-    for thread in threads:
+    for thread in tqdm.tqdm(threads):
         if watchlist.movies[thread[0]].available_platforms == None:
             watchlist.movies[thread[0]].available_platforms = dict()
-        link = thread[-1].join()
+        link = thread[-1].join(timeout=20)
         watchlist.movies[thread[0]].available_platforms[thread[1]] = link
-
-    # No threading version
-    # for movie in tqdm.tqdm(watchlist.movies):
-    #     if movie.available_platforms == None:
-    #         movie.available_platforms = dict()
-
-    #     for platform in platforms:
-    #         link = platforms[platform].search_movie(movie) 
-    #         movie.available_platforms[platform] = link
 
     print("Finished...")
 

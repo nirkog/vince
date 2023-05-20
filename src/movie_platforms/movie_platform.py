@@ -11,8 +11,8 @@ class SearchThread(Thread):
     def run(self):
         self.result = self.platform.search_movie(self.movie)
 
-    def join(self):
-        super().join()
+    def join(self, timeout=None):
+        super().join(timeout=timeout)
 
         return self.result
 
