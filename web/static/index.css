@@ -1,0 +1,100 @@
+body {
+	background-color: #fafafa;
+	font-family: 'Montserrat', sans-serif;
+	text-align: center;
+}
+
+#content {
+	width: 40%;
+	margin: auto;
+}
+
+h1 {
+	font-size: 4rem;
+}
+
+#form {
+	font-size: 1.2rem;
+	margin-bottom: 5%;
+}
+
+input {
+	padding: 3px;
+}
+
+button {
+	background-color: #0d6efd;
+	color: white;
+	padding: 9px 25px;
+	font-size: 1.2rem;
+	font-weight: 100;
+	border-radius: 5px;
+	border: none;
+	cursor: pointer;
+}
+
+button:hover {
+	background-color: #0d63fd;
+}
+
+#result_table {
+	border-collapse: collapse;
+	/* width: 100%; */
+	table-layout: fixed;
+	display: none;
+	margin: auto;
+}
+
+tr:nth-child(even) {
+	background-color: white;
+}
+
+td, th {
+	border: 1px solid #bbb;
+	padding: 8px 20px;
+	margin: 0;
+}
+
+table a {
+	text-decoration: none;
+	color: black;
+}
+
+/* LOADING SPINNER START */
+.lds-ring {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+  display: none;
+}
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border: 8px solid #0d63fd;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #0d63fd transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+/* LOADING SPINNER END */

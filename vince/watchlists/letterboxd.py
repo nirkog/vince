@@ -4,9 +4,9 @@ import math
 from threading import Thread
 from bs4 import BeautifulSoup
 
-from translators.translator import TranslationException
+from ..translators.translator import TranslationException
 from .watchlist import Watchlist
-from movie import Movie
+from ..movie import Movie
 
 class LetterboxdCsvWatchlist(Watchlist):
     def __init__(self, args):
@@ -47,9 +47,11 @@ class LetterboxdWatchlist(Watchlist):
         date = header.p.small.a.text
         self._movies.append(Movie(name, date))
 
-    def _get_movies_from_page(self, page_number):
-        request_url = f"https://letterboxd.com/{self.username}/watchlist/page/{page_number + 1}"
-        response = requests.get(request_url)
+    def _get_movies_from_page(self, page_number, response=None):
+        if response == None:
+            request_url = f"https://letterboxd.com/{self.username}/watchlist/page/{page_number + 1}"
+            response = requests.get(request_url)
+
         soup = BeautifulSoup(response.text, "html.parser")
         posters = soup.find_all("div", "poster")
         film_links = [poster["data-target-link"] for poster in posters]
@@ -68,9 +70,16 @@ class LetterboxdWatchlist(Watchlist):
         film_count = int(soup.find_all("div", "js-watchlist-content")[0]["data-num-entries"])
         page_count = math.ceil(film_count / 28)
         self._movies = []
+        threads = []
 
         for i in range(page_count):
-            self._get_movies_from_page(i)
+            _response = response if i == 0 else None
+            # self._get_movies_from_page(i, response=_response)
+            threads.append(Thread(target=LetterboxdWatchlist._get_movies_from_page, args=(self, i, _response)))
+            threads[-1].start()
+
+        for thread in threads:
+            thread.join()
     
         self._movies = sorted(self._movies, key=lambda movie: movie.name)
     

@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="{{ url_for("static", filename="index.css") }}">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
+    <title>Vince</title>
+  </head>
+
+  <body>
+	  <div id="content">
+
+	  <h1>Vince</h1>
+
+	  <div id="form">
+			<label>Enter your letterboxd username:</label>
+			<input id="username_input" placeholder="Your username" type="text" autofocus />
+			<br>
+			<label>Use availability cache</label>
+			<input id="use_availability_cache" type="checkbox" checked />
+			<br><br>
+			<button id="submit_button">Submit</button>
+	  </div>
+
+	  <div id="loading_ring" class="lds-ring"><div></div><div></div><div></div><div></div></div>
+
+	  <table id="result_table"></table>
+
+	  </div>
+
+	  <script src="{{ url_for("static", filename="index.js") }}"></script>
+  </body>
+</html>

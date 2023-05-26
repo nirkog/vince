@@ -1,3 +1,4 @@
 *.swp
 *.sw*
 __pycache__/
+.vince_cache
